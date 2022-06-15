@@ -1,9 +1,15 @@
+import { Normalize } from 'styled-normalize'
+import { Global } from './globalStyle';
+import Router from './routes';
 
 function App() {
   return (
-    <div className="App">
-      <h3>Hello World</h3>
-    </div>
+    <main className='container'>
+      <Normalize /> 
+      <Global />
+
+      <Router />
+    </main>
   );
 }
 
