@@ -8,6 +8,7 @@ export const Container = styled.main`
     height: 100vh;
     width: 150px;
     min-width: 150px;
+    border-radius: 0 80px 80px 0;
     
     nav {
         display: flex;
