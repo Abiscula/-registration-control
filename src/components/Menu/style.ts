@@ -7,7 +7,8 @@ export const Container = styled.main`
     background-color: var(--background-menu);
     height: 100vh;
     width: 150px;
-
+    min-width: 150px;
+    
     nav {
         display: flex;
         flex-direction: column;
