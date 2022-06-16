@@ -1,12 +1,15 @@
 import axios from "axios";
 import { userProps } from "../types";
 
+
+const baseURL = 'http://localhost:3333'
+
 export async function createNewPerson(personData: userProps) {
 
     try {
         const res = await axios.request({
             method: 'POST',
-            baseURL: 'http://localhost:3333/person',
+            baseURL: baseURL + '/person',
             data: {
                 nome: personData.nome,
                 sobrenome: personData.sobrenome,
@@ -23,6 +26,33 @@ export async function createNewPerson(personData: userProps) {
             }
         })
         return res.status
+    }catch(err) {
+        console.log(err)
+    }
+}
+
+export async function getAllPeople() {
+
+    try {
+        const res = await axios.request({
+            method: 'GET',
+            baseURL: baseURL + '/people'
+        })
+
+        return res.data
+    }catch(err) {
+        console.log(err)
+    }
+}
+
+export async function getPerson(cpf: string) {
+
+    try {
+        const res = await axios.request({
+            method: 'GET',
+            baseURL: baseURL + `/person/${cpf}`
+        })
+        return res.data
     }catch(err) {
         console.log(err)
     }
