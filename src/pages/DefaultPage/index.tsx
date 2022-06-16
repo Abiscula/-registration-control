@@ -1,9 +1,11 @@
-import { Container } from "./style";
+import { ColorTitle, Container } from "./style";
 
 export default function DefaultPage() {
     return (
         <Container>
-            <h3>Hello World</h3>
+            <div>
+                <ColorTitle>Painel de administração</ColorTitle>
+            </div>
         </Container>
     )
 }
