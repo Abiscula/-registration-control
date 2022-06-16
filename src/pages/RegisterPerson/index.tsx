@@ -2,24 +2,14 @@ import { useState } from "react"
 import { Container } from "./style"
 import InputMask from 'react-input-mask'
 import { searchZipCode } from "../../api/viaCEP"
+import { userProps } from "../../types"
+import { createNewPerson } from "../../api/backend"
+import { useNavigate } from "react-router-dom"
 
-
-interface userProps {
-    nome: string
-    sobrenome: string
-    nasc: string
-    cpf: string
-    email: string
-    tel: string
-    bairro: string
-    cep: string
-    localidade: string
-    logradouro: string
-    uf: string
-    numero: string
-}
 
 export default function RegisterPerson() {
+
+    const navigate = useNavigate()
 
     const [cep, setCep] = useState<string>('')
     const [userData, setUserData] = useState<userProps>({
@@ -39,13 +29,13 @@ export default function RegisterPerson() {
 
 
     async function getAddress(zipCode: string) {
-        zipCode = zipCode.replaceAll('.', '')
+        zipCode = zipCode.replaceAll('-', '')
         if (zipCode.length === 8) {
             const api = await searchZipCode(zipCode)
             setUserData({
                 ...userData,
                 bairro: api.bairro,
-                cep: api.cep,
+                cep: api.cep.replace('-', ''),
                 localidade: api.localidade,
                 logradouro: api.logradouro,
                 uf: api.uf
@@ -53,8 +43,12 @@ export default function RegisterPerson() {
         }
     }
 
-    function sendData() {
-        console.log(userData)
+    async function sendData() {
+        const api = await createNewPerson(userData)
+        if(api === 200) {
+            navigate('/')
+            alert(`Cadastro de ${userData.nome} realizado com sucesso!`)
+        }
     }
 
 
@@ -135,7 +129,7 @@ export default function RegisterPerson() {
                         <InputMask
                             placeholder="000.00.000"
                             className="input-cep"
-                            mask="999.99.999"
+                            mask="99999-999"
                             minLength={8}
                             required
                             onChange={(e) => setCep(e.target.value)}
