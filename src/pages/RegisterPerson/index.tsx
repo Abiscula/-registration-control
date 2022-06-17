@@ -11,6 +11,7 @@ export default function RegisterPerson() {
 
     const navigate = useNavigate()
 
+    const [validation, setValidation] = useState<boolean>(false)
     const [cep, setCep] = useState<string>('')
     const [userData, setUserData] = useState<userProps>({
         nome: '',
@@ -26,7 +27,6 @@ export default function RegisterPerson() {
         uf: '',
         numero: '',
     })
-
 
     async function getAddress(zipCode: string) {
         zipCode = zipCode.replaceAll('-', '')
@@ -44,10 +44,18 @@ export default function RegisterPerson() {
     }
 
     async function sendData() {
-        const api = await createNewPerson(userData)
-        if(api === 200) {
-            navigate('/')
-            alert(`Cadastro de ${userData.nome} realizado com sucesso!`)
+
+        if (userData.nome && userData.sobrenome && userData.nasc && userData.cpf && userData.email &&
+            userData.tel && userData.cep && userData.numero) {
+            setValidation(true)
+
+            const api = await createNewPerson(userData)
+            if (api === 200) {
+                navigate('/')
+                alert(`Cadastro de ${userData.nome} realizado com sucesso!`)
+            }
+        } else {
+            alert('Por favor, preencha todos os campos')
         }
     }
 
@@ -117,7 +125,7 @@ export default function RegisterPerson() {
                         mask="(99) 99999-9999"
                         minLength={8}
                         required
-                        onChange={(e) => setUserData({...userData, tel: e.target.value})}
+                        onChange={(e) => setUserData({ ...userData, tel: e.target.value })}
                     />
                 </span>
             </div>
@@ -175,10 +183,15 @@ export default function RegisterPerson() {
             </div>
 
             <div className="btn-div">
-                <button className="btn-register" onClick={sendData}>
+                <button
+                    className="btn-register"
+                    onClick={sendData}
+                    disabled={validation}
+                >
                     Enviar
                 </button>
             </div>
+            <span className="msg-validation">Todos os campos são obrigatório</span>
         </Container>
     )
 }
