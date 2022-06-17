@@ -82,8 +82,24 @@ export const Modal = styled.div`
 
         .btn-close:hover {
             transform: scale(1.1);
-            color: var(--color-red);
+            color: var(--color-danger);
         }
+    }
+
+    .btn-print {
+        width: 100px;
+        padding: 8px;
+        margin: auto;
+        border-radius: 15px;
+        border: none;
+        cursor: pointer;
+        background-color: var(--color-danger);
+        color: var(--color-white);
+    }
+
+    .btn-print:hover {
+        transform: scale(1.1);
+        opacity: 0.8;
     }
 
 `
