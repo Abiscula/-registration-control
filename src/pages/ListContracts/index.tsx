@@ -1,5 +1,8 @@
-import { AddressBook, XSquare } from "phosphor-react";
 import { useEffect, useState } from "react";
+import { AddressBook, XSquare } from "phosphor-react";
+import { useRef } from "react";
+import { useReactToPrint } from 'react-to-print';
+
 import { getAllContracts } from "../../api/backend";
 import Contract from "../../components/Contract";
 import { contractProps } from "../../types";
@@ -11,15 +14,18 @@ export default function ListContracts() {
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [selectedContract, setSelectedContract] = useState<contractProps>()
 
+    const componentRef: any = useRef(null);
+    const handlePrint = useReactToPrint({
+        content: () => componentRef?.current,
+    });
 
     async function openContract(contractNumber: string) {
 
         const contractData = contracts?.filter((contract) => contract.contractNumber === contractNumber)
-        setSelectedContract(contractData&&contractData[0])
-        console.log(contractData&&contractData[0])
+        setSelectedContract(contractData && contractData[0])
+        console.log(contractData && contractData[0])
         setOpenModal(true)
     }
-
 
     async function listAllContracts() {
         try {
@@ -42,9 +48,9 @@ export default function ListContracts() {
                     {contracts?.map(({ contractNumber, nome, sobrenome, contractValidate }: contractProps) => (
 
                         <span key={contractNumber}>
-                            <AddressBook 
-                                size={60} 
-                                weight="light" 
+                            <AddressBook
+                                size={60}
+                                weight="light"
                                 className="contract-icon"
                                 onClick={() => openContract(contractNumber)}
                             />
@@ -56,16 +62,19 @@ export default function ListContracts() {
                 </div>
             </section>
 
-            {openModal 
-            ?
-            <Modal>
-                <div>
-                    <XSquare size={30} weight="light" className="btn-close" onClick={() => setOpenModal(false)}/>
-                    <Contract data={selectedContract}/>
-                </div>
-            </Modal>
-            :
-            ''}
+            {openModal
+                ?
+                <Modal>
+                    <div>
+                        <XSquare size={30} weight="light" className="btn-close" onClick={() => setOpenModal(false)} />
+                        <Contract data={selectedContract} componentRef={componentRef}/>
+                    </div>
+                    <button className="btn-print" onClick={handlePrint}>Baixar contrato</button>
+                </Modal>
+                :
+                ''}
+
+
         </Container>
     )
 }
