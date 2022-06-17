@@ -54,4 +54,9 @@ export const Container = styled.main`
         }
     }
 
+    .msg-validation {
+        color: var(--color-gray);
+        text-align: center;
+    }
+
 `
