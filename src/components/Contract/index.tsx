@@ -1,7 +1,8 @@
+import { Container } from "./style";
 
 export default function Contract({data}: any) {
     return (
-        <section>
+        <Container>
         <h3>CONTRATO DE PRESTAÇÃO DE SERVIÇOS </h3>
 
         <h4>Contratante:</h4>
@@ -37,6 +38,6 @@ export default function Contract({data}: any) {
             cep: {data.cep} - Logradouro: {data.logradouro} {data.numero} - Bairro: {data.bairro} -
             {data.localidade}/{data.uf}
         </p>
-    </section>
+    </Container>
     )
 }
