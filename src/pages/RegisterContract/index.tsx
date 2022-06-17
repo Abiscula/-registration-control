@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Container } from "./style";
 import { createNewContract, getAllContracts, getAllPeople, getPerson } from "../../api/backend";
-import { contractProps, userProps } from "../../types";
+import { contractProps } from "../../types";
 import Contract from "../../components/Contract";
 import { ArrowBendUpRight, ArrowBendDownLeft, FileSearch } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
-import { cp } from "fs";
 
 
 interface optionProps {
@@ -65,7 +64,7 @@ export default function RegisterContract() {
                 sobrenome: res[0].sobrenome,
                 cpf: res[0].cpf,
                 nasc: res[0].nasc,
-                email: res[0].nasc,
+                email: res[0].email,
                 tel: res[0].tel,
                 cep: res[0].cep,
                 logradouro: res[0].logradouro,
