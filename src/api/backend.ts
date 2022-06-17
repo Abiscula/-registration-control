@@ -1,5 +1,5 @@
 import axios from "axios";
-import { userProps } from "../types";
+import { contractProps, userProps } from "../types";
 
 
 const baseURL = 'http://localhost:3333'
@@ -52,6 +52,52 @@ export async function getPerson(cpf: string) {
             method: 'GET',
             baseURL: baseURL + `/person/${cpf}`
         })
+        return res.data
+    }catch(err) {
+        console.log(err)
+    }
+}
+
+
+export async function createNewContract(contractData: contractProps) {
+
+    try {
+        const res = await axios.request({
+            method: 'POST',
+            baseURL: baseURL + '/contract',
+            data: {
+                cpf: contractData.cpf,
+                contractNumber: contractData.contractNumber,
+                contractDate: contractData.contractDate,
+                contractValidate: contractData.contractValidate,
+                nome: contractData.nome,
+                sobrenome: contractData.sobrenome,
+                nasc: contractData.nasc,
+                email: contractData.email,
+                tel: contractData.tel,
+                bairro: contractData.bairro,
+                cep: contractData.cep,
+                localidade: contractData.localidade,
+                logradouro: contractData.logradouro,
+                uf: contractData.uf,
+                numero: contractData.numero
+            }
+        })
+        return res.status
+    }catch(err) {
+        console.log(err)
+    }
+}
+
+
+export async function getAllContracts() {
+
+    try {
+        const res = await axios.request({
+            method: 'GET',
+            baseURL: baseURL + '/contracts'
+        })
+
         return res.data
     }catch(err) {
         console.log(err)
