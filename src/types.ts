@@ -12,3 +12,9 @@ export interface userProps {
     uf: string
     numero: string
 }
+
+export interface contractProps extends userProps {
+    contractNumber: string
+    contractDate: string
+    contractValidate: string
+}
