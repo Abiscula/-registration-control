@@ -16,14 +16,14 @@ export const Container = styled.main`
         align-self: flex-end;
         width: 15%;
         border-radius: 10px;
-
     }
 
     section {
-        margin-top: 3rem;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        margin-top: 3rem;
+        overflow-y: scroll;
         
 
         div {
