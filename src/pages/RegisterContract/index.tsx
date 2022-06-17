@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Container } from "./style";
-import { getAllPeople, getPerson } from "../../api/backend";
-import { contractProps } from "../../types";
+import { createNewContract, getAllContracts, getAllPeople, getPerson } from "../../api/backend";
+import { contractProps, userProps } from "../../types";
 import Contract from "../../components/Contract";
 import { ArrowBendUpRight, ArrowBendDownLeft, FileSearch } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
+import { cp } from "fs";
 
 
 interface optionProps {
@@ -12,10 +14,8 @@ interface optionProps {
     cpf: string
 }
 
-
-
 export default function RegisterContract() {
-
+    
     const [person, setPerson] = useState<contractProps>({
         nome: '',
         sobrenome: '',
@@ -34,11 +34,25 @@ export default function RegisterContract() {
         contractValidate: ''
     })
     const [option, setOption] = useState<optionProps[]>()
-    const date = new Date()
+    const navigate = useNavigate()
 
+    const date = new Date()
     const contractNumber = date.getTime()
     const contractDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     const contractValidate = `${date.getDate()}/${date.getMonth() + 4}/${date.getFullYear()}`
+
+
+    async function newContract() {
+        try {
+            const res = await createNewContract(person)
+            if(res === 200) {
+                navigate('/')
+                alert(`Contrato nº ${person.contractNumber} criado em nome de ${person.nome}`)
+            }
+        }catch(err) {
+            console.log(err)
+        }
+    }
 
 
     async function specifyPerson(personData: string) {
@@ -70,8 +84,14 @@ export default function RegisterContract() {
 
     async function listPeople() {
         try {
-            const api = await getAllPeople()
-            setOption(api)
+            const people = await getAllPeople()
+            const contracts = await getAllContracts()
+            
+            let notExist = [].concat(
+                people.filter((p: any) => contracts.every((c: any) => p.cpf !== c.cpf)),
+                contracts.filter((c: any) => people.every((p: any) => c.cpf !== p.cpf))
+            );
+            setOption(notExist)
         } catch (err) {
             console.log(err)
         }
@@ -80,6 +100,7 @@ export default function RegisterContract() {
     useEffect(() => {
         listPeople()
     }, [])
+    
 
     return (
         <Container>
@@ -109,7 +130,9 @@ export default function RegisterContract() {
 
 
             <div className="btn-div">
-                <button className="btn-register">Enviar</button>
+                <button className="btn-register" onClick={() => newContract()}>
+                    Enviar
+                </button>
             </div>
         </Container>
     )
