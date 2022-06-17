@@ -7,7 +7,7 @@ import { getAllContracts } from "../../api/backend";
 import Contract from "../../components/Contract";
 import { contractProps } from "../../types";
 import { Container, Modal } from "./style";
-
+import { compareDate } from "../../utils/compareDate";
 
 export default function ListContracts() {
 
@@ -24,7 +24,7 @@ export default function ListContracts() {
 
     function checkValidate(filterOption: string) {
 
-        if(filterOption === 'Todos') {
+        if (filterOption === 'Todos') {
             setValidContracts(contracts)
         } else {
             const option: any = {
@@ -33,20 +33,13 @@ export default function ListContracts() {
                 "7 dias": 7,
                 "Hoje": 0
             }
-            const optionDate = option[filterOption]
-            let filteredContracts: any = []
-            contracts?.forEach((contract: contractProps) => {
-                let partesData: any = contract.contractValidate.split("/");
-                const date = new Date(partesData[2], partesData[1] - 1, partesData[0]);
-                const today = new Date()
-                let newDate = today.setDate(today.getDate() + optionDate)
-                if(date <= new Date(newDate)) {
-                    filteredContracts.push(contract)
-                }
-            })
-            setValidContracts(filteredContracts)
+
+            if (contracts) {
+                const checkValidate = compareDate(contracts, option[filterOption])
+                setValidContracts(checkValidate)
+            }
         }
-        }
+    }
 
 
     async function openContract(contractNumber: string) {
