@@ -12,6 +12,13 @@ export const Container = styled.main`
     margin: auto;
     padding: 5rem;
 
+    select {
+        align-self: flex-end;
+        width: 15%;
+        border-radius: 10px;
+
+    }
+
     section {
         margin-top: 3rem;
         display: flex;
