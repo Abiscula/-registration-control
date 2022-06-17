@@ -4,6 +4,7 @@ import DefaultPage from './pages/DefaultPage';
 import ListContracts from './pages/ListContracts';
 import RegisterContract from './pages/RegisterContract';
 import RegisterPerson from './pages/RegisterPerson';
+import Statistics from './pages/Statistics';
 
 export default function AppRouter() {
   return (
@@ -19,6 +20,8 @@ export default function AppRouter() {
           <Route path='/register-contract' element={<RegisterContract />} />
 
           <Route path='/contracts' element={<ListContracts />} />
+
+          <Route path='/statistics' element={<Statistics />} />
 
         </Routes>
       </Router>
