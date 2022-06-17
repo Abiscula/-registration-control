@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Container } from "./style";
 import { getAllPeople, getPerson } from "../../api/backend";
-import { userProps } from "../../types";
-import  Contract  from "../../components/Contract";
+import { contractProps } from "../../types";
+import Contract from "../../components/Contract";
+import { ArrowBendUpRight, ArrowBendDownLeft, FileSearch } from "phosphor-react";
+
 
 interface optionProps {
     nome: string
@@ -10,11 +12,7 @@ interface optionProps {
     cpf: string
 }
 
-interface contractProps extends userProps {
-    contractNumber: string
-    contractDate: string
-    contractValidate: string
-}
+
 
 export default function RegisterContract() {
 
@@ -37,7 +35,7 @@ export default function RegisterContract() {
     })
     const [option, setOption] = useState<optionProps[]>()
     const date = new Date()
-    
+
     const contractNumber = date.getTime()
     const contractDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     const contractValidate = `${date.getDate()}/${date.getMonth() + 4}/${date.getFullYear()}`
@@ -65,7 +63,7 @@ export default function RegisterContract() {
                 contractDate: String(contractDate),
                 contractValidate: String(contractValidate)
             })
-        }catch(err) {
+        } catch (err) {
             console.log(err)
         }
     }
@@ -74,7 +72,7 @@ export default function RegisterContract() {
         try {
             const api = await getAllPeople()
             setOption(api)
-        }catch(err) {
+        } catch (err) {
             console.log(err)
         }
     }
@@ -85,20 +83,33 @@ export default function RegisterContract() {
 
     return (
         <Container>
-            <div>
-                <label>Selecione um profissional</label>
+            <span>
+                <label className="colorTitle">Selecione um profissional</label>
                 <select onChange={(e) => specifyPerson(e.target.value)}>
                     <option></option>
                     {
-                        option?.map(({cpf, nome, sobrenome}: optionProps) => (
+                        option?.map(({ cpf, nome, sobrenome }: optionProps) => (
                             <option key={cpf}>
                                 {`CPF: ${cpf} - ${nome} ${sobrenome}`}
                             </option>
                         ))
                     }
                 </select>
+            </span>
 
-                { person.cpf ? <Contract data={person}/>  : '' }
+            {person.cpf 
+            ?   <Contract data={person} /> 
+            :   <section>
+                    <ArrowBendUpRight size={150} className="icon" weight="light" />
+                    <FileSearch size={200} className="icon" weight="thin"/>
+                    <ArrowBendDownLeft size={150} className="icon" weight="light" />
+                
+                </section>}
+
+
+
+            <div className="btn-div">
+                <button className="btn-register">Enviar</button>
             </div>
         </Container>
     )
