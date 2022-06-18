@@ -12,6 +12,16 @@ export const Container = styled.main`
     margin: auto;
     padding: 5rem;
 
+    @media (max-width: 1200px) {
+        width: 600px;
+        min-width: 300px;
+    }
+
+    @media (max-width: 1024px) {
+        width: 400px;
+        min-width: 300px;
+    }
+
     select {
         align-self: flex-end;
         width: 15%;
@@ -22,8 +32,7 @@ export const Container = styled.main`
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        margin-top: 3rem;
-        overflow-y: scroll;
+        margin-top: 1rem;
         
 
         div {
@@ -37,8 +46,12 @@ export const Container = styled.main`
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                height: 150px;
-                width: 250px;
+                height: 130px;
+                width: 350px;
+
+                @media (max-width: 1024px) {
+                    width: 300px;
+                }   
 
                 .contract-icon {
                     cursor: pointer;
@@ -49,6 +62,32 @@ export const Container = styled.main`
                     transform: scale(1.2);
                     color: var(--background-menu);
                 }
+
+            }
+
+            .paginationBtn {
+                width: 80%;
+                height: 40px;
+                list-style: none;
+                display: flex;
+                justify-content: center;
+            }
+
+            .paginationBtn a {
+                padding: 8px;
+                margin: 8px;
+                border-radius: 5px;
+                color: var(--color-white);
+                background-color: var(--background-menu);
+                cursor: pointer;
+            }
+
+            .paginationBtn a:hover {
+                opacity: 0.8;
+            }
+            
+            .paginationActive {
+                opacity: 0.8;
             }
         }
     }
