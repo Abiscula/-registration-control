@@ -1,5 +1,8 @@
+import moment from "moment"
 import { useEffect, useState } from "react"
 import { getAllContracts, getAllPeople } from "../../api/backend"
+import { contractProps } from "../../types"
+import { averageDate } from "../../utils/averageData"
 import { compareDate } from "../../utils/compareDate"
 import { Container } from "./style"
 
@@ -17,17 +20,20 @@ export default function Statistics() {
         const people = await getAllPeople()
         const contracts = await getAllContracts()
         const expirationDate = compareDate(contracts, 0)
+        const timeService = averageDate(contracts)
 
-        setData({...data, 
+        setData({
+            ...data,
             allPeople: people.length,
             allContracts: contracts.length,
-            expirationDate: expirationDate.length
+            expirationDate: expirationDate.length,
+            timeService: timeService
         })
     }
 
     useEffect(() => {
         getAllData()
-        
+
     }, [])
 
     return (
@@ -45,7 +51,7 @@ export default function Statistics() {
             </div>
 
             <div>
-                <section>  
+                <section>
                     <h4>Contratos a Vencer</h4>
                     <span className="colorTitle">{data.expirationDate}</span>
                 </section>
