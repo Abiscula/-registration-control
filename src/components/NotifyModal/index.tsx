@@ -1,5 +1,5 @@
 
-import { XSquare } from 'phosphor-react'
+import { CheckCircle, Warning, XCircle, XSquare } from 'phosphor-react'
 import Modal from 'react-modal'
 import { useModalContext } from '../../context/modalContext'
 import { Container } from './style'
@@ -36,6 +36,13 @@ export default function NotifyModal() {
         contentLabel="Example Modal"
       >
         <Container>
+          {message[0] === 'warning'
+            ? <Warning className="icon-type" size={70} color="#f0ad4e" weight="light" />
+            :
+            message[0] === 'error'
+              ? <XCircle className="icon-type" size={70} color="#d9534f" weight="light" />
+              : <CheckCircle className="icon-type" size={70} color="#5cb85c" weight="light" />
+          }
           <XSquare size={30} weight="light" className="btn-close" onClick={closeModal} />
           <span className={`msg-${message[0]}`}>{message[1]}</span>
         </Container>
