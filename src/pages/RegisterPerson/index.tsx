@@ -5,11 +5,14 @@ import { searchZipCode } from "../../api/viaCEP"
 import { userProps } from "../../types"
 import { createNewPerson } from "../../api/backend"
 import { useNavigate } from "react-router-dom"
+import { useModalContext } from "../../context/modalContext"
+import NotifyModal from "../../components/NotifyModal"
 
 
 export default function RegisterPerson() {
 
     const navigate = useNavigate()
+    const { setOpenModal, setMessage } = useModalContext()
 
     const [validation, setValidation] = useState<boolean>(false)
     const [cep, setCep] = useState<string>('')
@@ -52,16 +55,20 @@ export default function RegisterPerson() {
             const api = await createNewPerson(userData)
             if (api === 200) {
                 navigate('/')
-                alert(`Cadastro de ${userData.nome} realizado com sucesso!`)
+                setMessage(['success', `Cadastro de ${userData.nome} realizado com sucesso!`])
+                setOpenModal(true)
+                
             }
         } else {
-            alert('Por favor, preencha todos os campos')
+            setMessage(['error', 'Por favor, preencha todos os campos'])
+            setOpenModal(true)
         }
     }
 
 
     return (
         <Container>
+            <NotifyModal />
             <div>
                 <span>
                     <label>Nome</label>
