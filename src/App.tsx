@@ -1,5 +1,6 @@
 import { Normalize } from 'styled-normalize'
 import { Global } from './globalStyle';
+import { ModalProvider } from './context/modalContext';
 import Router from './routes';
 
 function App() {
@@ -8,7 +9,9 @@ function App() {
       <Normalize /> 
       <Global />
 
-      <Router />
+      <ModalProvider>
+        <Router />
+      </ModalProvider>
     </main>
   );
 }
