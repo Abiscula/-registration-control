@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.main`
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     width: 400px;
     height: 150px;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
 
     span {
         font-size: 1.3rem;
+        margin-bottom: 1rem;
     }
 
     .btn-close {
@@ -34,6 +35,12 @@ export const Container = styled.main`
 
     .msg-warning {
         color: #f0ad4e;
+    }
+
+    .icon-type {
+        /* position: absolute;
+        top: 0.8rem;
+        left: 0.8rem; */
     }
 
 `
