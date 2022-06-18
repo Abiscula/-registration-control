@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AddressBook, XSquare } from "phosphor-react";
 import { useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
+import ReactPaginate from "react-paginate";
 
 import { getAllContracts } from "../../api/backend";
 import Contract from "../../components/Contract";
@@ -15,6 +16,32 @@ export default function ListContracts() {
     const [validContracts, setValidContracts] = useState<contractProps[]>()
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [selectedContract, setSelectedContract] = useState<contractProps>()
+    const [pageNumber, setPageNumber] = useState<number>(0)
+    const [countContracts, setCountContracts] = useState<number>(0)
+
+
+    const ContractsPerPage = 8
+    const pagesVisited = pageNumber * ContractsPerPage
+
+    const displayContracts: any = validContracts?.slice(pagesVisited, pagesVisited + ContractsPerPage)
+        .map(({ contractNumber, nome, sobrenome, contractValidate }: contractProps) => (
+            <span key={contractNumber}>
+                <AddressBook
+                    size={70}
+                    weight="light"
+                    className="contract-icon"
+                    onClick={() => openContract(contractNumber)}
+                />
+                <label>{nome} {sobrenome}</label>
+                <label>{contractValidate}</label>
+            </span>
+        ))
+
+    const pageCount = Math.ceil(countContracts / ContractsPerPage)
+
+    const changePage = ({ selected }: any) => {
+        setPageNumber(selected)
+    }
 
     const componentRef = useRef(null);
     const handlePrint = useReactToPrint({
@@ -26,6 +53,9 @@ export default function ListContracts() {
 
         if (filterOption === 'Todos') {
             setValidContracts(contracts)
+            if (contracts) {
+                setCountContracts(contracts.length)
+            }
         } else {
             const option: any = {
                 "30 dias": 30,
@@ -38,6 +68,9 @@ export default function ListContracts() {
             if (contracts) {
                 const checkValidate = compareDate(contracts, option[filterOption])
                 setValidContracts(checkValidate)
+                if (validContracts) {
+                    setCountContracts(validContracts.length)
+                }
             }
         }
     }
@@ -56,6 +89,7 @@ export default function ListContracts() {
             const api = await getAllContracts()
             setContracts(api)
             setValidContracts(api)
+            setCountContracts(api.length)
         } catch (err) {
             console.log(err)
         }
@@ -79,20 +113,16 @@ export default function ListContracts() {
             </select>
             <section>
                 <div>
-                    {validContracts?.map(({ contractNumber, nome, sobrenome, contractValidate }: contractProps) => (
+                    {displayContracts}
+                    <ReactPaginate
+                        previousLabel={'Anterior'}
+                        nextLabel={'Próxima'}
+                        pageCount={pageCount}
+                        onPageChange={changePage}
+                        containerClassName={'paginationBtn'}
+                        activeClassName={'paginationActive'}
+                    />
 
-                        <span key={contractNumber}>
-                            <AddressBook
-                                size={60}
-                                weight="light"
-                                className="contract-icon"
-                                onClick={() => openContract(contractNumber)}
-                            />
-                            <label>{nome} {sobrenome}</label>
-                            <label>{contractValidate}</label>
-                        </span>
-
-                    ))}
                 </div>
             </section>
 
