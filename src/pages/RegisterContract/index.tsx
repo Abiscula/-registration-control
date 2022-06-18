@@ -5,6 +5,8 @@ import { contractProps } from "../../types";
 import Contract from "../../components/Contract";
 import { ArrowBendUpRight, ArrowBendDownLeft, FileSearch } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
+import NotifyModal from "../../components/NotifyModal";
+import { useModalContext } from "../../context/modalContext";
 
 
 interface optionProps {
@@ -33,10 +35,10 @@ export default function RegisterContract() {
         contractValidate: ''
     })
     const [option, setOption] = useState<optionProps[]>()
-    const [personData, setPersonData] = useState<string>()
-    const [duration, setDuration] = useState<string>()
+    const [personData, setPersonData] = useState<string>('')
+    const [duration, setDuration] = useState<string>('')
     const navigate = useNavigate()
-
+    const { setMessage, setOpenModal } = useModalContext()
     const date = new Date()
     const contractNumber = date.getTime()
     const contractDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
@@ -56,32 +58,41 @@ export default function RegisterContract() {
 
 
     async function specifyPerson() {
-        let contractValidate = `${date.getDate()}/${date.getMonth() + Number(duration) + 1}/${date.getFullYear()}`
 
-        try {
-            if (personData) {
-                const res = await getPerson(personData)
-                setPerson({
-                    nome: res[0].nome,
-                    sobrenome: res[0].sobrenome,
-                    cpf: res[0].cpf,
-                    nasc: res[0].nasc,
-                    email: res[0].email,
-                    tel: res[0].tel,
-                    cep: res[0].cep,
-                    logradouro: res[0].logradouro,
-                    localidade: res[0].localidade,
-                    numero: res[0].numero,
-                    uf: res[0].uf,
-                    bairro: res[0].bairro,
-                    contractNumber: String(contractNumber),
-                    contractDate: String(contractDate),
-                    contractValidate: contractValidate
-                })
+        if(personData.length === 0) {
+            setMessage(['error', `Seleciona uma pessoa para vincular o contrato`])
+            setOpenModal(true)
+        }else if (duration.length === 0) {
+            setMessage(['warning', `Informe a validade do contrato`])
+            setOpenModal(true)
+        } else {
+            let contractValidate = `${date.getDate()}/${date.getMonth() + Number(duration) + 1}/${date.getFullYear()}`
+
+            try {
+                if (personData) {
+                    const res = await getPerson(personData)
+                    setPerson({
+                        nome: res[0].nome,
+                        sobrenome: res[0].sobrenome,
+                        cpf: res[0].cpf,
+                        nasc: res[0].nasc,
+                        email: res[0].email,
+                        tel: res[0].tel,
+                        cep: res[0].cep,
+                        logradouro: res[0].logradouro,
+                        localidade: res[0].localidade,
+                        numero: res[0].numero,
+                        uf: res[0].uf,
+                        bairro: res[0].bairro,
+                        contractNumber: String(contractNumber),
+                        contractDate: String(contractDate),
+                        contractValidate: contractValidate
+                    })
+                }
+
+            } catch (err) {
+                console.log(err)
             }
-
-        } catch (err) {
-            console.log(err)
         }
     }
 
@@ -107,6 +118,7 @@ export default function RegisterContract() {
 
     return (
         <Container>
+            <NotifyModal />
             <div>
                 <span>
                     <label className="colorTitle">Selecione um profissional</label>
@@ -127,9 +139,10 @@ export default function RegisterContract() {
                         <input
                             type="number"
                             className="input-validate"
+                            placeholder="meses"
                             onChange={(e) => setDuration(e.target.value)}
                         />
-                        <button disabled={!duration} onClick={() => specifyPerson()}>Abrir</button>
+                        <button onClick={() => specifyPerson()}>Abrir</button>
                     </span>
                 </aside>
             </div>
