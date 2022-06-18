@@ -12,23 +12,65 @@ export const Container = styled.main`
     padding: 5rem;
     justify-content: space-between;
 
-    span {
+    div {
         display: flex;
-        flex-direction: column;
-        align-self: flex-end;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
 
-        label {
-            margin-bottom: 0.5rem;
-            align-self: center;
-            font-size: 1.2rem;
+        span {
+            display: flex;
+            flex-direction: column;
 
+            label {
+                margin-bottom: 0.5rem;
+                align-self: center;
+                font-size: 1.2rem;
+
+            }
+
+            select {
+                border-radius: 12px;
+
+            }
         }
 
-        select {
-            border-radius: 12px;
+        aside   {
+            display: flex;
+            flex-direction: column;
 
+            label {
+                margin-bottom: 0.5rem;
+                align-self: center;
+                font-size: 1.2rem;
+            }
+
+            span {
+                display: flex;
+                flex-direction: row;
+            }
+
+            input {
+                border-radius: 12px 0 0 10px;
+                width: 100px;
+                border-right: none;
+                padding: 3.8px;
+                border: 1px solid var(--background-menu);
+            }
+
+            button {
+                border-radius: 0 12px 10px 0;
+                width: 50px;
+                border-left: none;
+                background-color: var(--background-menu);
+                color: var(--color-white);
+                cursor: pointer;
+
+            }
         }
     }
+
+
 
     section {
         align-self: center;
