@@ -31,7 +31,8 @@ export default function ListContracts() {
                 "30 dias": 30,
                 "15 dias": 15,
                 "7 dias": 7,
-                "Hoje": 0
+                "Hoje": 0,
+                "Vencidos": -1
             }
 
             if (contracts) {
@@ -74,6 +75,7 @@ export default function ListContracts() {
                 <option>15 dias</option>
                 <option>7 dias</option>
                 <option>Hoje</option>
+                <option>Vencidos</option>
             </select>
             <section>
                 <div>
