@@ -43,6 +43,9 @@ export default function RegisterPerson() {
                 logradouro: api.logradouro,
                 uf: api.uf
             })
+        } else {
+            setMessage(['error', 'CEP deve possuir 8 digitos'])
+            setOpenModal(true)
         }
     }
 
