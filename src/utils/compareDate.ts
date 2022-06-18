@@ -3,8 +3,8 @@ import { contractProps } from "../types";
 export function compareDate(contracts: contractProps[], additionValue: number) {
     let filteredContracts: any = []
     contracts?.forEach((contract: contractProps) => {
-        let partesData: string[] | any = contract.contractValidate.split("/");
-        const date: Date = new Date(partesData[2], partesData[1] - 1, partesData[0]);
+        let dateParts: string[] | any = contract.contractValidate.split("/");
+        const date: Date = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
         if (additionValue === -1) {
             if (date < new Date()) {
                 filteredContracts.push(contract)
