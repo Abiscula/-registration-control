@@ -26,7 +26,7 @@ Também é possivel visualizar o menu lateral que fornece acesso a todas às pá
 
 Nessa página é onde iremos realizar o cadastro de uma nova pessoa na plataforma. Todos os campos são obrigatórios, portanto existem validações que impedem o envio incorreto dos dados.
 
-O campo de CEP faz uma chamada para a API <a href="https://viacep.com.br/">ViaCEP</a> que retorna o endereço completo do usuário, bastante apenas preencher o número da residência.
+O campo de CEP faz uma chamada para a API <a href="https://viacep.com.br/">ViaCEP</a> que retorna o endereço completo do usuário, bastando apenas preencher o número da residência.
 
 ![registerPage1](https://user-images.githubusercontent.com/85578784/174488607-a65dd9f5-f553-4fcc-9ece-f8808ccf2a66.gif)
 
