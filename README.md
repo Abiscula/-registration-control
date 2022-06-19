@@ -15,7 +15,7 @@ Para utilizar essa aplicação, será necessário clonar este repositório e o r
 
 ### `Página: Principal`
 
-Essa é a apenas a página de apresentação da aplicação, na imagem abaixo aparece um icone vermelho no canto superior direita da tela. Esse icone irá aparecer como forma de alerta quando houve algum contrato vencido na plataforma.
+Essa é a página de apresentação da aplicação, na imagem abaixo aparece um icone vermelho no canto superior direita da tela. Esse icone irá aparecer como forma de alerta quando houve algum contrato vencido na plataforma.
 
 Também é possivel visualizar o menu lateral que fornece acesso a todas às páginas da aplicação.
 
