@@ -23,6 +23,13 @@ export const Global = createGlobalStyle`
         justify-content: center;
         box-shadow: inset 0 -7px 0 rgba(0, 0, 0, 0.3), 0 5px 0 rgba(0, 0, 0, 0.15);
 
+        @media (max-width: 1024px) {
+            width: 90px;
+            height: 90px;
+            min-height: 90px;
+            font-size: 1rem;
+        }
+
     }
 
 
@@ -42,6 +49,12 @@ export const Global = createGlobalStyle`
   
         &:hover {
           transform: scale(1.1);
+        }
+
+        @media (max-width: 1024px) {
+            width: 70px;
+            height: 70px;
+            min-height: 70px;
         }
 
     }

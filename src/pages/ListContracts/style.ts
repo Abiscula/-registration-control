@@ -12,7 +12,7 @@ export const Container = styled.main`
     margin: auto;
     padding: 5rem;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1360px) {
         width: 600px;
         min-width: 300px;
     }
@@ -26,6 +26,10 @@ export const Container = styled.main`
         align-self: flex-end;
         width: 15%;
         border-radius: 10px;
+
+        @media (max-width: 1024px) {
+            width: 20%;
+        }   
     }
 
     section {
@@ -49,8 +53,12 @@ export const Container = styled.main`
                 height: 130px;
                 width: 350px;
 
+                @media (max-width: 1360px) {
+                    width: 250px;
+                }
+
                 @media (max-width: 1024px) {
-                    width: 300px;
+                    width: 150px;
                 }   
 
                 .contract-icon {
@@ -71,6 +79,10 @@ export const Container = styled.main`
                 list-style: none;
                 display: flex;
                 justify-content: center;
+
+                @media (max-width: 1024px) {
+                    width: 60%;
+                } 
             }
 
             .paginationBtn a {

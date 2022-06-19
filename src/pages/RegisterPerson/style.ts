@@ -12,10 +12,24 @@ export const Container = styled.main`
     margin: auto;
     padding: 5rem;
 
+    @media (max-width: 1360px) {
+        width: 600px;
+        min-width: 300px;
+    }
+
+    @media (max-width: 1024px) {
+        width: 400px;
+        min-width: 300px;
+        overflow-y: scroll;
+    }
+
     div {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        @media (max-width: 1024px) {
+            flex-direction: column;
+        }  
 
         span {
             display: flex;
@@ -23,10 +37,21 @@ export const Container = styled.main`
             align-items: center;
             gap: 5px;
 
+            @media (max-width: 1024px) {
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 0px;
+                margin-bottom: 1rem;
+
+                label {
+                    width: 100px;
+                }
+            }  
+
             input {
                 width: 250px;
                 border-radius: 10px;
-                padding: 8px;
+                padding: 8px;        
             }
 
             section {
@@ -57,6 +82,10 @@ export const Container = styled.main`
     .msg-validation {
         color: var(--color-gray);
         text-align: center;
+
+        @media (max-width: 1024px) {
+            margin-top: 1rem;
+        }  
     }
 
 `

@@ -12,6 +12,16 @@ export const Container = styled.main`
     padding: 5rem;
     justify-content: space-between;
 
+    @media (max-width: 1360px) {
+        width: 600px;
+        min-width: 300px;
+    }
+
+    @media (max-width: 1024px) {
+        width: 400px;
+        min-width: 300px;
+    }
+
     div {
         display: flex;
         flex-direction: row;
@@ -31,6 +41,11 @@ export const Container = styled.main`
 
             select {
                 border-radius: 12px;
+
+                @media (max-width: 1024px) {
+                    width: 68%;
+                    font-size: 0.9rem;
+                }  
 
             }
         }
@@ -56,6 +71,11 @@ export const Container = styled.main`
                 border-right: none;
                 padding: 3.8px;
                 border: 1px solid var(--background-menu);
+
+                @media (max-width: 1024px) {
+                    width: 40%;
+                    font-size: 0.8rem;
+                }  
             }
 
             button {
@@ -65,7 +85,6 @@ export const Container = styled.main`
                 background-color: var(--background-menu);
                 color: var(--color-white);
                 cursor: pointer;
-
             }
         }
     }
@@ -77,6 +96,18 @@ export const Container = styled.main`
 
         .icon {
             color: var(--color-gray);
+        }
+
+        .icon:first-child {
+            @media (max-width: 1024px) {
+                display: none;
+            }
+        }
+
+        .icon:last-child {
+            @media (max-width: 1024px) {
+                display: none;
+            }
         }
     }
 

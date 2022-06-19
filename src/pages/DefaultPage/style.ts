@@ -15,6 +15,16 @@ export const Container = styled.main`
     padding: 5rem;
     position: relative;
 
+    @media (max-width: 1360px) {
+        width: 600px;
+        min-width: 300px;
+    }
+
+    @media (max-width: 1024px) {
+        width: 400px;
+        min-width: 300px;
+    }
+
     h1 {
         font-size: 2.5rem;
     }
