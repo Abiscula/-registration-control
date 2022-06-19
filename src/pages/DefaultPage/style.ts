@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+
+
 export const Container = styled.main`
     display: flex;
     flex-direction: column;
@@ -11,9 +13,39 @@ export const Container = styled.main`
     border-radius: 60px;
     margin: auto;
     padding: 5rem;
+    position: relative;
 
     h1 {
         font-size: 2.5rem;
+    }
+
+    .doc {
+        color: var(--color-danger);
+        position: absolute;
+        top: 70px;
+        left: 50px;
+    }
+
+    .doc-title {
+        color: var(--color-danger);
+        position: absolute;
+        top: 70px;
+        left: 100px;
+    }
+
+    .gear {
+        color: var(--color-gray);
+        position: absolute;
+        bottom: 70px;
+        right: 50px;
+        animation: is-rotating 4s linear infinite;
+
+        @keyframes is-rotating {
+          to {
+            transform: rotate(1turn);
+          }
+        }
+
     }
 
 `
