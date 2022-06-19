@@ -45,23 +45,29 @@ export default function RegisterContract() {
 
 
     async function newContract() {
-        try {
-            const res = await createNewContract(person)
-            if (res === 200) {
-                navigate('/')
-                setMessage(['success', `Contrato nº ${person.contractNumber} criado em nome de ${person.nome}`])
-                setOpenModal(true)
+        if(person.cpf && person.contractValidate) {
+            try {
+                const res = await createNewContract(person)
+                if (res === 200) {
+                    navigate('/')
+                    setMessage(['success', `Contrato nº ${person.contractNumber} criado em nome de ${person.nome}`])
+                    setOpenModal(true)
+                }
+            } catch (err) {
+                console.log(err)
             }
-        } catch (err) {
-            console.log(err)
+        } else {
+            setMessage(['error', `Finalize a criação do contrato antes de enviar`])
+            setOpenModal(true)
         }
+
     }
 
 
     async function specifyPerson() {
 
         if(personData.length === 0) {
-            setMessage(['error', `Seleciona uma pessoa para vincular o contrato`])
+            setMessage(['error', `Selecione uma pessoa para vincular o contrato`])
             setOpenModal(true)
         }else if (duration.length === 0) {
             setMessage(['warning', `Informe a validade do contrato`])
