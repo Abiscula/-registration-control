@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=FINALIZADO&color=GREEN&style=for-the-badge)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Controle de contratos
 
-In the project directory, you can run:
+Com este aplicativo é possivel registrar pessoas no banco de dados, criar contratos e vincula-los com alguma pessoa previamente cadastrada (somente 1 contrato por pessoa), ter acesso a uma lista paginada com todos contratos criados e por fim um dashboard contendo algumas estatísticas para facilitar o controle do administrador.
 
-### `npm start`
+## Instruções de uso
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Para utilizar essa aplicação, será necessário clonar este repositório e o repositório <a href="https://github.com/Abiscula/-registration-control-backend">-registration-control-backend</a>. Em ambos repositórios será necessário executar o comando <b>"npm install"</b> para baixar todas as dependências do projeto.
+<ul>
+  <li>front-end: <b>"npm start"</b></li>
+  <li>back-end: <b>"npm run dev"</b></li>
+</ul>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `Página: Principal`
 
-### `npm test`
+Essa é a apenas a página de apresentação da aplicação, na imagem abaixo aparece um icone vermelho no canto superior direita da tela. Esse icone irá aparecer como forma de alerta quando houve algum contrato vencido na plataforma.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Também é possivel visualizar o menu lateral que fornece acesso a todas às páginas da aplicação.
 
-### `npm run build`
+![defaultPage](https://user-images.githubusercontent.com/85578784/174488400-b01371ea-2286-40f5-a50e-574f96c78fed.gif)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `Pagina: Cadastro de pessoas`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Nessa página é onde iremos realizar o cadastro de uma nova pessoa na plataforma. Todos os campos são obrigatórios, portanto existem validações que impedem o envio incorreto dos dados.
 
-### `npm run eject`
+O campo de CEP faz uma chamada para a API <a href="https://viacep.com.br/">ViaCEP</a> que retorna o endereço completo do usuário, bastante apenas preencher o número da residência.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![registerPage1](https://user-images.githubusercontent.com/85578784/174488607-a65dd9f5-f553-4fcc-9ece-f8808ccf2a66.gif)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Também é possível visualizar, que existem modais de alerta personalizadas para orientar os usuários sobre suas ações.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![registerPage2](https://user-images.githubusercontent.com/85578784/174488943-b0a576e8-7501-4cd7-85ba-0bf13de3d646.gif)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `Pagina: Criação de contratos`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
