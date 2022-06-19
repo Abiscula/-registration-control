@@ -49,7 +49,8 @@ export default function RegisterContract() {
             const res = await createNewContract(person)
             if (res === 200) {
                 navigate('/')
-                alert(`Contrato nº ${person.contractNumber} criado em nome de ${person.nome}`)
+                setMessage(['success', `Contrato nº ${person.contractNumber} criado em nome de ${person.nome}`])
+                setOpenModal(true)
             }
         } catch (err) {
             console.log(err)
